@@ -1,0 +1,56 @@
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+.pytest_cache/
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+/media/
+staticfiles/
+
+# Environment
+myenv/
+*.env
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+
+# Others
+*.bak
+*.swp
+*.swo
+
+# Ignore all migrations
+migrations/
+
+# Ignore test and coverage reports
+.coverage
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+
+# Ignore virtual environment files
+*.pyd
+*.pyo
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+
+# Ignore jupyter notebook checkpoints
+.ipynb_checkpoints/
