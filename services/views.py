@@ -66,6 +66,7 @@ class Block(APIView):
         python_data = JSONParser().parse(stream)
 
         no_passengers = python_data.get("no_passengers", None)
+        
         bus_name = python_data.get("bus_name", None)
         if not no_passengers or not bus_name:
             return HttpResponse(json.dumps({"error":"number of passengers required"}),  content_type='application/json',status=400)
@@ -73,7 +74,10 @@ class Block(APIView):
         bus = get_object_or_404(models.Bus, name=bus_name)
         # Retrieve the seats instance related to this bus
         seats = get_object_or_404(models.Seats, bus=bus)
-
+        # Validation
+        print("validate", seats.total_seats, seats.available_seats, seats.blocked_seats + seats.booked_seats +  no_passengers)
+        if seats.total_seats <  seats.blocked_seats + seats.booked_seats +  no_passengers:
+            return HttpResponse(json.dumps({"error":f"Seats available:{seats.total_seats - seats.blocked_seats - seats.booked_seats}"}), content_type = "application/json", status = 400)
         # Create the Block object
         
         block_obj = models.Block.objects.create(seats_bus=seats, blocked_seats=no_passengers)

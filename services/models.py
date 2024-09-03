@@ -51,11 +51,13 @@ class Block(models.Model):
     block_id = models.UUIDField(default=uuid.uuid4, editable=False)
     seats_bus = models.ForeignKey(Seats, on_delete=models.CASCADE)
     blocked_seats = models.IntegerField()
+    
 
 class Book(models.Model):
     book_id = models.UUIDField(default=uuid.uuid4, editable=False)
     seats_bus = models.ForeignKey(Seats, on_delete=models.CASCADE)
     booked_seats = models.IntegerField()
+    
 
 @receiver(post_delete, sender=Book)
 def update_seats_on_book_delete(sender, instance, **kwargs):
